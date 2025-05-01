@@ -10,7 +10,7 @@ const FeedCard = ({
   reportPosts,
 }) => {
   return (
-    <div className="bg-white shadow rounded p-4 space-y-2" key={id}>
+    <div className="bg-white shadow rounded p-4 space-y-2 m-5" key={id}>
       <div className="font-bold text-lg">{title}</div>
       <div className="text-gray-500 text-sm">{platform}</div>
       <div className="flex gap-3">

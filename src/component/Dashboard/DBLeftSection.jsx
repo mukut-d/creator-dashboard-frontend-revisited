@@ -5,6 +5,7 @@ const dashboardLeftItems = [
   { title: "Home", path: "/" },
   { title: "Feeds", path: "/dashboard/feeds" },
   { title: "Credits", path: "/dashboard/credits" },
+  { title: "Admin Credits", path: "/dashboard/credits-admin" },
   { title: "Saved Feeds", path: "/dashboard/saved" },
   { title: "Recent Activity", path: "/dashboard/recent" },
   { title: "Logout", path: "/" },

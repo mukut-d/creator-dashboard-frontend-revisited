@@ -4,6 +4,7 @@ import FeedsAgg from "./FeedsAgg";
 import Saved from "./Saved";
 import Recent from "./Recent";
 import Credits from "./Credits";
+import AdminCredits from "./AdminCredits";
 
 const DBRightSection = () => {
   return (
@@ -13,6 +14,7 @@ const DBRightSection = () => {
         <Route path={"saved"} element={<Saved />} />
         <Route path={"recent"} element={<Recent />} />
         <Route path={"credits"} element={<Credits />} />
+        <Route path={"credits-admin"} element={<AdminCredits />} />
       </Routes>
     </div>
   );
