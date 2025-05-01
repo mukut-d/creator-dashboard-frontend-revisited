@@ -10,7 +10,6 @@ const savePosts = () => toast.success(`Posts saved`);
 const copyPosts = () => toast.success(`Post copied to clipboard`);
 
 const FeedsAgg = () => {
-  console.log("news api key " + NEWS_API_KEY);
   const [posts, setPosts] = useState([]);
 
   const reportPostsHandler = (id) => {
