@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { userStore } from "../../store/userStore";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const setUserId = userStore((state) => state.setUserId);
+  const setRole = userStore((state) => state.setRole);
   const navigate = useNavigate();
   const {
     register,
@@ -37,6 +40,8 @@ const Login = () => {
 
       if (result.ok) {
         localStorage.setItem("token", result?.token);
+        setUserId(result?._id);
+        setRole(result?.role);
 
         toast.success("Login successfull");
         setTimeout(() => {

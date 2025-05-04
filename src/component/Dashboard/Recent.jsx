@@ -1,5 +1,6 @@
 import React from "react";
 import { usePosts } from "../../hooks/usePosts";
+import NoActivity from "../NoActivity";
 
 const activityTypeStyle = {
   saved: "bg-green-50 border-green-200",
@@ -24,6 +25,10 @@ const Recent = () => {
         return `This link (${item?.others}) was shared`;
     }
   };
+
+  if (recent.length === 0) {
+    return <NoActivity />;
+  }
 
   return (
     <div className="flex justify-center p-10">

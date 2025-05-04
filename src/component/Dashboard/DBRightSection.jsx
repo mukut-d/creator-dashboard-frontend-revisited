@@ -5,6 +5,7 @@ import Saved from "./Saved";
 import Recent from "./Recent";
 import Credits from "./Credits";
 import AdminCredits from "./AdminCredits";
+import AdminUsers from "./AdminUsers";
 
 const DBRightSection = () => {
   return (
@@ -15,6 +16,7 @@ const DBRightSection = () => {
         <Route path={"recent"} element={<Recent />} />
         <Route path={"credits"} element={<Credits />} />
         <Route path={"credits-admin"} element={<AdminCredits />} />
+        <Route path={"credits-admin-users"} element={<AdminUsers />} />
       </Routes>
     </div>
   );
