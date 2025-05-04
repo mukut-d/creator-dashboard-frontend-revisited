@@ -18,7 +18,7 @@ This is the **frontend** of the Creator Dashboard web application, built using *
 - **Frontend**: React.js + Vite
 - **Styling**: Tailwind CSS
 - **Routing**: React Router
-- **State Management**: useState / useEffect
+- **State Management**: useState / useEffect / Zustand
 - **Deployment**: Firebase Hosting
 
 ---
