@@ -19,9 +19,6 @@ const Saved = () => {
               id={item?.id}
               title={item?.title}
               platform={item?.platform}
-              // savePosts={savePostsHandler}
-              // sharePosts={sharePostsHandler}
-              // reportPosts={reportPostsHandler}
             />
           );
         })

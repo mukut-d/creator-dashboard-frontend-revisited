@@ -23,7 +23,7 @@ const FeedsAgg = () => {
 
   const savePostsHandler = (id) => {
     savePostsToast();
-    const postToSave = posts?.filter((item) => item?.id === id);
+    const postToSave = posts?.filter((item) => item?._id === id);
     // console.log({ ...postToSave[0] });
     savePosts(postToSave);
     // make api call to save the posts in db
@@ -45,7 +45,7 @@ const FeedsAgg = () => {
 
     const data = reddit?.data?.data?.children?.map((posts) => {
       return {
-        id: posts?.data.id,
+        _id: posts?.data.id,
         title: posts?.data.title,
         url: `https://reddit.com${posts.data.permalink}`,
         saved: false,
@@ -60,11 +60,10 @@ const FeedsAgg = () => {
     setIsLoading(false);
 
     //  console.log("news " + JSON.stringify(news, null, 2));
-    let idx = 0;
+
     const newsData = news.data.articles?.slice(0, 10).map((news) => {
-      idx++;
       return {
-        id: idx,
+        _id: Date.now(),
         title: news?.title,
         url: news.url,
         saved: false,
@@ -93,7 +92,7 @@ const FeedsAgg = () => {
         return (
           <FeedCard
             url={item?.url}
-            id={item?.id}
+            id={item?._id}
             title={item?.title}
             platform={item?.platform}
             savePosts={savePostsHandler}

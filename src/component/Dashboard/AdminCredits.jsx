@@ -1,5 +1,5 @@
 // AdminCredits.jsx
-import React, { useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { creditDummy } from "./Credits";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -10,7 +10,7 @@ const AdminCredits = () => {
   const [credits, setCredits] = useState(creditDummy.balance);
   const [newCredits, setNewCredits] = useState("");
 
-  const handleUpdate = () => {
+  const handleUpdate = useCallback(() => {
     setCredits((prev) => {
       if (prev === Number(newCredits)) {
         notupdateCredits("Credits are same as before");
@@ -20,7 +20,7 @@ const AdminCredits = () => {
       updateCredits();
       return Number(newCredits);
     });
-  };
+  }, []);
 
   return (
     <div className="p-6 h-full ">
@@ -47,4 +47,4 @@ const AdminCredits = () => {
   );
 };
 
-export default AdminCredits;
+export default memo(AdminCredits);

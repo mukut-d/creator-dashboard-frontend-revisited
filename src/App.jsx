@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Login from "./component/Forms/Login";
 import Dashboard from "./containers/Dashboard";
 import { Route, Routes } from "react-router-dom";
@@ -18,4 +18,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default memo(App);
