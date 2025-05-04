@@ -3,16 +3,19 @@ import { useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { userStore } from "../../store/userStore";
+import { usePosts } from "../../hooks/usePosts";
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const setUserId = userStore((state) => state.setUserId);
   const setRole = userStore((state) => state.setRole);
+  const userId = userStore((state) => state.userId);
   const navigate = useNavigate();
+  const { getActivity, getAllUserCredits, getSavedPosts, getCredits } =
+    usePosts();
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -42,6 +45,13 @@ const Login = () => {
         localStorage.setItem("token", result?.token);
         setUserId(result?._id);
         setRole(result?.role);
+        if (result?.role === "admin") {
+          getAllUserCredits();
+        } else {
+          getActivity(userId);
+          getCredits();
+          getSavedPosts(userId);
+        }
 
         toast.success("Login successfull");
         setTimeout(() => {
@@ -50,8 +60,8 @@ const Login = () => {
       } else {
         toast.error(result.message);
       }
-    } catch (err) {
-      console.log("Error: " + err.message);
+    } catch (error) {
+      console.log("Error: " + error.message);
       toast.error("Login Failed, something went wrong!");
     }
   };

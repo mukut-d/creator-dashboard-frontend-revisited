@@ -1,30 +1,39 @@
-// AdminCredits.jsx
-import React, { memo, useCallback, useState } from "react";
-import { creditDummy } from "./Credits";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { usePosts } from "../../hooks/usePosts";
 
-const updateCredits = () => toast.success(`Credits Updated Successfully`);
+const updateCreditsAlert = () => toast.success(`Credits Updated Successfully`);
 const notupdateCredits = (text) => toast.error(text);
 
-const AdminCredits = () => {
-  const [credits, setCredits] = useState(creditDummy.balance);
+const AdminCredits = ({ userId = -1, currentCredit = 0 }) => {
+  const [credits, setCredits] = useState(currentCredit);
   const [newCredits, setNewCredits] = useState("");
+  const { updateCredits, credits: allCredits } = usePosts();
+
+  useEffect(() => {
+    const user = allCredits?.find((u) => u._id === Number(userId));
+    if (user) {
+      setCredits(user.credits);
+    }
+  }, [userId, allCredits]);
 
   const handleUpdate = useCallback(() => {
-    setCredits((prev) => {
-      if (prev === Number(newCredits)) {
-        notupdateCredits("Credits are same as before");
-        return prev;
-      }
+    const newVal = Number(newCredits);
+    if (credits === newVal) {
+      notupdateCredits("Credits are same as before");
+      return;
+    }
 
-      updateCredits();
-      return Number(newCredits);
-    });
-  }, []);
+    updateCredits({ userId, credits: newVal });
+    updateCreditsAlert();
+    setCredits(newVal);
+    setNewCredits("");
+  }, [credits, newCredits, userId, updateCredits]);
 
   return (
-    <div className="p-6 h-full ">
-      <h2 className="text-xl font-semibold mb-4">Admin Credit Control</h2>
+    <div className="p-6 h-full">
+      <h2 className="text-xl font-semibold mb-4">Edit User Credits</h2>
+      <p className="text-lg font-medium">User ID: {userId}</p>
       <p className="text-xl font-normal m-4">
         Current Balance:{" "}
         <strong className="text-4xl font-semibold">{credits}</strong>

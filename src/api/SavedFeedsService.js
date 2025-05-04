@@ -1,32 +1,38 @@
+import { getAuthHeaders } from "./AuthService";
+
 const BASE_URL = "http://localhost:8000/api";
 
-export const savedPost = async () => {
+export const savedPost = async (postObj) => {
+  // console.log("postObj " + JSON.stringify(postObj, null, 2));
   try {
     const response = await fetch(`${BASE_URL}/posts/saved`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: getAuthHeaders(),
       body: JSON.stringify(postObj),
     });
     if (!response.ok) throw new Error("Failed to save Posts");
 
     return await response.json();
-  } catch (err) {
-    throw new Error(err.message);
+  } catch (error) {
+    throw new Error(error.message);
   }
 };
 
 export const getPosts = async (userId) => {
   try {
-    const ress = await fetch(`${BASE_URL}/posts/${userId}`);
+    const response = await fetch(`${BASE_URL}/posts/${userId}`, {
+      method: "GET",
+      headers: getAuthHeaders(),
+    });
 
-    const data = ress.json();
+    const data = response.json();
 
-    if (!ress.ok) {
+    if (!response.ok) {
       throw new Error("Failed to get saved posts");
     }
 
     return data;
-  } catch (e) {
-    console.log(e.message);
+  } catch (error) {
+    console.log(error.message);
   }
 };

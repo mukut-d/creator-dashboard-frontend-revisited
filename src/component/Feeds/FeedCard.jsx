@@ -9,43 +9,49 @@ const FeedCard = ({
   savePosts,
   sharePosts,
   reportPosts,
+  isSaved,
 }) => {
   const { saveActivity } = usePosts();
 
   const activityHandler = (type) => {
     let activityObj = {
-      type: type,
+      action: type,
+      platform: platform,
     };
     if (type === "saved") {
-      activityObj["others"] = title;
+      activityObj["details"] = title;
       savePosts(id);
     }
 
     if (type === "reported") {
-      activityObj["others"] = id;
+      activityObj["details"] = `Reported this id ${id}`;
       reportPosts(id);
     }
 
     if (type === "shared") {
-      activityObj["others"] = url;
+      activityObj["details"] = url;
       sharePosts(url);
     }
-
-    console.log("url " + url);
 
     saveActivity(activityObj);
   };
 
   return (
     <div className="bg-white shadow rounded p-4 space-y-2 m-5" key={id}>
-      <div className="font-bold text-lg">{title}</div>
+      {isSaved && <div className="font-bold text-lg">Topic</div>}
+      <div className="font-normal text-md">{title}</div>
       <div className="text-gray-500 text-sm">{platform}</div>
+
       <div className="flex gap-3">
         <button
-          onClick={() => activityHandler("saved")}
+          onClick={() => {
+            if (!isSaved) {
+              activityHandler("saved");
+            }
+          }}
           className="text-blue-500 cursor-pointer active:scale-95 active:shadow-inner transition duration-150"
         >
-          Save
+          {isSaved ? "Unsave" : "Save"}
         </button>
         <button
           onClick={() => activityHandler("shared")}

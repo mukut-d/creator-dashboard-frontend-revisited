@@ -1,72 +1,45 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import { usePosts } from "../../hooks/usePosts";
+import { useNavigate } from "react-router-dom";
 
-const AdminUsers = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+const AdminUsers = ({ getCurrentCredit }) => {
+  const { credits } = usePosts();
+  const navigate = useNavigate();
 
-  // Dummy user data
-  const dummyUsers = [
-    {
-      _id: "u1",
-      username: "johndoe",
-      email: "johndoe@example.com",
-      credits: 120,
-    },
-    {
-      _id: "u2",
-      username: "janedoe",
-      email: "janedoe@example.com",
-      credits: 95,
-    },
-    {
-      _id: "u3",
-      username: "adminuser",
-      email: "admin@example.com",
-      credits: 200,
-    },
-  ];
-
-  const fetchCredits = async () => {
-    try {
-      const token = localStorage.getItem("token"); // or from context
-      const res = await axios.get("/api/admin/credits", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUsers(res.data.users);
-    } catch (err) {
-      console.error("Failed to fetch users", err);
-    } finally {
-      setLoading(false);
-    }
+  const updateNavigationHandler = (currentCredit, userId) => {
+    getCurrentCredit(currentCredit, userId);
+    navigate("/dashboard/credits-admin");
   };
-
-  useEffect(() => {
-    fetchCredits();
-  }, []);
-
-  if (loading) return <div className="p-4">Loading...</div>;
 
   return (
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">User Credits Overview</h2>
-      <div className="overflow-x-auto shadow border rounded-lg">
+      <div className="overflow-x-auto shadow border rounded-lg max-h-[500px] overflow-y-auto">
         <table className="min-w-full text-left bg-white">
-          <thead className="bg-gray-100 border-b">
+          <thead className="bg-gray-100 border-b sticky top-0 z-10">
             <tr>
-              <th className="px-4 py-3">Username</th>
-              <th className="px-4 py-3">Email</th>
+              <th className="px-4 py-3">User ID</th>
               <th className="px-4 py-3">Credits</th>
+              <th className="px-4 py-3">Role</th>
+              <th className="px-4 py-3">Actions</th>
             </tr>
           </thead>
           <tbody>
-            {dummyUsers.map((user) => (
-              <tr key={user._id} className="border-t hover:bg-gray-50">
-                <td className="px-4 py-2">{user.username}</td>
-                <td className="px-4 py-2">{user.email}</td>
+            {credits?.map((user, index) => (
+              <tr key={index} className="border-t hover:bg-gray-50">
+                <td className="px-4 py-2">{user._id}</td>
                 <td className="px-4 py-2 font-semibold">{user.credits}</td>
+                <td className="px-4 py-2">User</td>
+                <td className="px-4 py-2">
+                  <div
+                    onClick={() => {
+                      updateNavigationHandler(user?.credits, user._id);
+                    }}
+                    className="text-blue-600 hover:underline"
+                  >
+                    Edit
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

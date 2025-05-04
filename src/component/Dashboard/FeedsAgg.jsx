@@ -25,8 +25,7 @@ const FeedsAgg = () => {
     savePostsToast();
     const postToSave = posts?.filter((item) => item?._id === id);
     // console.log({ ...postToSave[0] });
-    savePosts(postToSave);
-    // make api call to save the posts in db
+    savePosts(postToSave[0]);
   };
 
   const sharePostsHandler = (url) => {

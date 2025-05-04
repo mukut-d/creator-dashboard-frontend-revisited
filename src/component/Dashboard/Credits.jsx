@@ -12,7 +12,8 @@ export const creditDummy = {
 };
 
 const Credits = () => {
-  const { balance, history } = creditDummy;
+  const { history } = creditDummy;
+  const balance = localStorage.getItem("credits") || 0;
   return (
     <div className="p-6 space-y-4">
       <h1 className="text-2xl font-semibold">Credit Balance</h1>

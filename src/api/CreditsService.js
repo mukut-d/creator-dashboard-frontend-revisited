@@ -1,5 +1,6 @@
+import { getAuthHeaders } from "./AuthService";
+
 const BASE_URL = "http://localhost:8000/api/credits";
-const token = localStorage.getItem("token");
 
 // User Apis
 
@@ -7,7 +8,7 @@ export const earnCredits = async (actions) => {
   try {
     const response = await fetch(`${BASE_URL}/credits/earn`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: token },
+      headers: getAuthHeaders(),
       body: JSON.stringify({ ...actions }),
     });
     if (!response.ok) throw new Error("Failed to save credits");
@@ -22,7 +23,7 @@ export const getCredits = async () => {
   try {
     const response = await fetch(`${BASE_URL}/credits`, {
       method: "GET",
-      headers: { "Content-Type": "application/json", Authorization: token },
+      headers: getAuthHeaders(),
     });
 
     const data = response.json();
@@ -38,12 +39,11 @@ export const getCredits = async () => {
 };
 
 // Admin Apis
-
 export const getAllCredits = async () => {
   try {
     const response = await fetch(`${BASE_URL}/admin/credits`, {
       method: "GET",
-      headers: { "Content-Type": "application/json", Authorization: token },
+      headers: getAuthHeaders(),
     });
 
     const data = response.json();
@@ -59,12 +59,14 @@ export const getAllCredits = async () => {
 };
 
 export const updateCredits = async (creditsObj) => {
+  console.log("credit obj " + JSON.stringify(creditsObj, null, 2));
+
   try {
     const response = await fetch(
       `${BASE_URL}/admin/credits/${creditsObj?.userId}`,
       {
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: getAuthHeaders(),
         body: JSON.stringify({ ...creditsObj?.credits }),
       }
     );
