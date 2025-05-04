@@ -32,11 +32,14 @@ const Login = () => {
     const type = isLogin ? "login" : "register";
 
     try {
-      const response = await fetch(`http://localhost:8000/api/auth/${type}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/${type}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        }
+      );
 
       const result = await response.json();
       console.log(JSON.stringify(result, null, 2));

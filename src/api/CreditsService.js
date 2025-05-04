@@ -1,6 +1,7 @@
 import { getAuthHeaders } from "./AuthService";
 
-const BASE_URL = "http://localhost:8000/api/credits";
+// const BASE_URL = "http://localhost:8000/api/credits";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/credits`;
 
 // User Apis
 

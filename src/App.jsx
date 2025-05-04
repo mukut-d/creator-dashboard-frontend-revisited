@@ -3,6 +3,7 @@ import Login from "./component/Forms/Login";
 import Dashboard from "./containers/Dashboard";
 import { Route, Routes } from "react-router-dom";
 import PostProvider from "./store/postsStore";
+import { app, analytics } from "./firebase";
 
 const App = () => {
   return (
