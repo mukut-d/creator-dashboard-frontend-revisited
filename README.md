@@ -1,12 +1,54 @@
-# React + Vite
+# 🎨 Creator Dashboard – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **frontend** of the Creator Dashboard web application, built using **React.js**, **Vite**, and **Tailwind CSS**, and hosted on **Firebase Hosting**.
 
-Currently, two official plugins are available:
+> 📌 A responsive web app that allows creators to manage profiles, earn credits, and interact with a personalized content feed.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Live Demo
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+🌐 Frontend: [creator-dashboard-frontend.web.app](https://creator-dashboard-frontend.web.app)  
+🔗 Backend API: [creator-backend on Google Cloud Run](https://creator-backend-225020848824.us-central1.run.app)
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: React.js + Vite
+- **Styling**: Tailwind CSS
+- **Routing**: React Router
+- **State Management**: useState / useEffect
+- **Deployment**: Firebase Hosting
+
+---
+
+## 🔐 Core Features
+
+- 🔑 User Authentication (JWT)
+- 🧑‍⚖️ Role-based Access (User & Admin)
+- 📊 Credit Tracking UI
+- 📰 Personalized Feed (from Reddit, Twitter, LinkedIn APIs)
+- 💾 Save / Share / Report Content
+- 📈 User Dashboard and Admin Panel
+- 📱 Responsive UI
+
+---
+
+## 🔧 Setup Instructions
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/yourusername/creator-dashboard.git
+cd creator-dashboard/frontend
+
+# 2. Install dependencies
+npm install
+
+# 3. Configure environment
+# Create a .env file with Firebase keys
+cp .env.example .env
+
+# 4. Run locally
+npm run dev
+```
