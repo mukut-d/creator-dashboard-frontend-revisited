@@ -59,8 +59,12 @@ const PostProvider = ({ children }) => {
 
   const getActivityHandler = async (userId) => {
     const data = await getActivity(userId);
+    console.log("data from activity" + JSON.stringify(data, null, 2));
     setRecent((prev) => {
-      return [...prev, ...data];
+      if (data) {
+        return [...prev, ...data];
+      }
+      return [...prev];
     });
   };
 
@@ -68,9 +72,12 @@ const PostProvider = ({ children }) => {
 
   // Admin
   const updateCreditsHandler = async (creditObj) => {
-    const response = await updateCredits(creditObj);
-
-    localStorage.setItem({ credits: response?.user?.credits });
+    try {
+      const response = await updateCredits(creditObj);
+      localStorage.setItem({ credits: response?.user?.credits });
+    } catch (error) {
+      console.log("error " + error);
+    }
   };
 
   const getAllUserCreditsHandler = async () => {
@@ -87,13 +94,22 @@ const PostProvider = ({ children }) => {
 
   // Users
   const getCreditsHandler = async () => {
-    const response = await getCredits();
-
-    localStorage.setItem({ credits: response?.credits });
+    try {
+      const response = await getCredits();
+      localStorage.setItem(credits, response?.credits);
+    } catch (error) {
+      console.log("error " + error);
+    }
   };
 
   const earnCreditsHandler = async (action) => {
-    const response = await earnCredits(action);
+    try {
+      const response = await earnCredits(action);
+
+      return response;
+    } catch (error) {
+      console.log("error" + error);
+    }
   };
 
   // console.log("recent " + JSON.stringify(recent, null, 2));

@@ -27,6 +27,7 @@ const Login = () => {
   const toggleLogin = () => setIsLogin(!isLogin);
 
   const onSubmit = async (data) => {
+    console.log(import.meta.env.VITE_API_URL);
     // console.log(data); // or send to API
 
     const type = isLogin ? "login" : "register";
