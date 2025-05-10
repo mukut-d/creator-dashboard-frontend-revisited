@@ -5,7 +5,7 @@ const BASE_URL = `${import.meta.env.VITE_API_URL}/api`;
 
 export const getActivity = async (userId) => {
   try {
-    const response = await fetch(`${BASE_URL}/activity/${userId}`, {
+    const response = await fetch(`${BASE_URL}/activity/activity/${userId}`, {
       headers: getAuthHeaders(),
     });
 

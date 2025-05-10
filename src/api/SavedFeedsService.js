@@ -21,7 +21,7 @@ export const savedPost = async (postObj) => {
 
 export const getPosts = async (userId) => {
   try {
-    const response = await fetch(`${BASE_URL}/posts/${userId}`, {
+    const response = await fetch(`${BASE_URL}/posts/saved/${userId}`, {
       method: "GET",
       headers: getAuthHeaders(),
     });
